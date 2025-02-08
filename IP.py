@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def get_ip():
-    ip_address = request.remote_addr
-    return ip_address
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    return ip
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
